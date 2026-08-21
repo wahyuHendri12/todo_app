@@ -1,0 +1,371 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Plus Jakarta Sans", "Segoe UI", system-ui, sans-serif;
+    background: linear-gradient(-45deg, #6366f1, #8b5cf6, #a855f7, #6366f1);
+    background-size: 300% 300%;
+    animation: gradientShift 14s ease infinite;
+    min-height: 100vh;
+    padding: 48px 16px;
+    color: #1f2937;
+}
+
+@keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+.container {
+    max-width: 560px;
+    margin: 0 auto;
+}
+
+/* ===== Header ===== */
+.app-header {
+    text-align: center;
+    color: #fff;
+    margin-bottom: 28px;
+    animation: fadeDown 0.6s ease backwards;
+}
+
+.app-title {
+    font-size: 2.4rem;
+    font-weight: 800;
+    letter-spacing: -1px;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.app-subtitle {
+    margin-top: 8px;
+    font-size: 0.95rem;
+    opacity: 0.9;
+}
+
+/* ===== Card ===== */
+.card {
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.22);
+    padding: 28px;
+    animation: fadeUp 0.6s ease 0.15s backwards;
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-16px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== Form ===== */
+.task-form {
+    display: flex;
+    gap: 10px;
+}
+
+.task-form input {
+    flex: 1;
+    padding: 13px 16px;
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.task-form input:focus {
+    border-color: #6366f1;
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.12);
+}
+
+.task-form button {
+    padding: 13px 26px;
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 700;
+    font-family: inherit;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.task-form button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(99, 102, 241, 0.45);
+}
+
+.task-form button:active {
+    transform: translateY(0) scale(0.97);
+}
+
+/* ===== Progress ===== */
+.progress-section {
+    margin-top: 24px;
+    animation: fadeIn 0.5s ease 0.3s backwards;
+}
+
+.progress-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #6b7280;
+    margin-bottom: 8px;
+}
+
+.progress-track {
+    height: 10px;
+    background: #eef2ff;
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #6366f1, #10b981);
+    border-radius: 999px;
+    transition: width 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ===== Daftar tugas ===== */
+.task-section {
+    margin-top: 26px;
+    animation: fadeIn 0.5s ease 0.35s backwards;
+}
+
+.task-section h2 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.badge {
+    background: #eef2ff;
+    color: #6366f1;
+    font-size: 0.78rem;
+    font-weight: 800;
+    padding: 3px 11px;
+    border-radius: 999px;
+}
+
+.task-list {
+    list-style: none;
+}
+
+.task-item {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-left: 4px solid #6366f1;
+    border-radius: 12px;
+    padding: 13px 16px;
+    margin-bottom: 10px;
+    font-size: 0.98rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease,
+                background 0.3s ease;
+    animation: slideIn 0.45s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateX(-18px); }
+    to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+.task-item:hover {
+    transform: translateX(5px);
+    border-left-color: #8b5cf6;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.07);
+}
+
+.task-title {
+    position: relative;
+    transition: color 0.3s ease;
+    word-break: break-word;
+}
+
+/* Coretan animasi saat selesai */
+.task-title::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 55%;
+    height: 2px;
+    width: 0;
+    background: #9ca3af;
+    border-radius: 2px;
+    transition: width 0.35s ease;
+}
+
+.task-item.done .task-title {
+    color: #9ca3af;
+}
+
+.task-item.done .task-title::after {
+    width: 100%;
+}
+
+/* ===== Tombol aksi ===== */
+.task-actions {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-done {
+    padding: 6px 14px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    font-family: inherit;
+    color: #6366f1;
+    background: #eef2ff;
+    border: 1px solid #c7d2fe;
+    border-radius: 999px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease;
+}
+
+.btn-done:hover {
+    background: #6366f1;
+    color: #fff;
+    transform: scale(1.05);
+}
+
+.btn-delete {
+    width: 30px;
+    height: 30px;
+    font-size: 1.15rem;
+    line-height: 1;
+    color: #dc2626;
+    background: transparent;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease;
+}
+
+.btn-delete:hover {
+    background: #fef2f2;
+    color: #b91c1c;
+    transform: rotate(90deg) scale(1.1);
+}
+
+/* Status done pada tombol */
+.task-item.done {
+    background: #f0fdf4;
+    border-left-color: #10b981;
+}
+
+.task-item.done .btn-done {
+    color: #059669;
+    background: #d1fae5;
+    border-color: #a7f3d0;
+}
+
+.task-item.done .btn-done:hover {
+    background: #10b981;
+    color: #fff;
+}
+
+/* ===== Empty state ===== */
+.empty-state {
+    text-align: center;
+    color: #9ca3af;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    padding: 36px 16px;
+    border: 2px dashed #e5e7eb;
+    border-radius: 14px;
+    animation: fadeIn 0.5s ease;
+}
+
+.empty-icon {
+    width: 46px;
+    height: 46px;
+    margin: 0 auto 12px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #eef2ff, #fce7f3);
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-8px); }
+}
+
+/* ===== Footer ===== */
+.app-footer {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 0.82rem;
+    margin-top: 20px;
+    animation: fadeIn 0.6s ease 0.5s backwards;
+}
+
+/* Animasi masuk bergantian (stagger) tanpa style inline */
+.task-item:nth-child(1)  { animation-delay: 0s; }
+.task-item:nth-child(2)  { animation-delay: 0.06s; }
+.task-item:nth-child(3)  { animation-delay: 0.12s; }
+.task-item:nth-child(4)  { animation-delay: 0.18s; }
+.task-item:nth-child(5)  { animation-delay: 0.24s; }
+.task-item:nth-child(6)  { animation-delay: 0.3s; }
+.task-item:nth-child(7)  { animation-delay: 0.36s; }
+.task-item:nth-child(8)  { animation-delay: 0.42s; }
+.task-item:nth-child(9)  { animation-delay: 0.48s; }
+.task-item:nth-child(10) { animation-delay: 0.54s; }
+.task-item:nth-child(11) { animation-delay: 0.6s; }
+.task-item:nth-child(n+12) { animation-delay: 0.66s; }
+
+/* ===== Animasi mode tanpa reload ===== */
+#task-list.no-anim .task-item:not(.item-new) {
+    animation: none;
+}
+
+.task-item.item-new {
+    animation: popIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes popIn {
+    from { opacity: 0; transform: scale(0.92); }
+    to   { opacity: 1; transform: scale(1); }
+}
+
+.task-item.removing {
+    opacity: 0;
+    transform: translateX(40px);
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+/* ===== Aksesibilitas: hormati preferensi reduksi gerak ===== */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}

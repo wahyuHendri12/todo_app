@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="id">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Todo Apps</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+            rel="stylesheet">
+        <link rel="stylesheet" href="/css/style.css">
+    </head>
+    <body>
+        <main class="container">
+
+            <header class="app-header">
+                <h1 class="app-title">Todo Apps</h1>
+                <p class="app-subtitle">
+                    <%= new Date().toLocaleDateString("id-ID", { weekday:
+                    "long", day: "numeric", month: "long", year: "numeric" }) %>
+                </p>
+            </header>
+
+            <div class="card">
+                <form action="/tasks" method="POST" class="task-form"
+                    id="form-add">
+                    <input
+                        type="text"
+                        name="title"
+                        id="input-title"
+                        placeholder="Masukkan tugas baru..."
+                        required
+                        autocomplete="off">
+                    <button type="submit">Tambah</button>
+                </form>
+
+                <section class="progress-section" id="progress-section"
+                    <%=tasks.length> 0 ? '' : 'hidden' %>>
+                    <div class="progress-info">
+                        <span>Progres</span>
+                        <span id="progress-text"></span>
+                    </div>
+                    <div class="progress-track">
+                        <div class="progress-fill" id="progress-fill"
+                            style="width: 0%"></div>
+                    </div>
+                </section>
+
+                <section class="task-section">
+                    <h2>Daftar Tugas <span class="badge" id="task-badge"><%=
+                            tasks.length %></span></h2>
+
+                    <div class="empty-state" id="empty-state" <%=tasks.length> 0
+                        ? 'hidden' : '' %>>
+                        <div class="empty-icon"></div>
+                        <p>Belum ada tugas.<br>Tambahkan tugas pertamamu di
+                            atas!</p>
+                    </div>
+
+                    <ul class="task-list" id="task-list">
+                        <% tasks.forEach(task => { %>
+                        <li class="task-item <%= task.is_done ? 'done' : '' %>"
+                            data-id="<%= task.id %>">
+                            <span class="task-title"><%= task.title %></span>
+                            <div class="task-actions">
+                                <form action="/tasks/<%= task.id %>/toggle"
+                                    method="POST" class="form-toggle">
+                                    <button type="submit" class="btn-done"><%=
+                                        task.is_done ? 'Urungkan' : 'Selesai'
+                                        %></button>
+                                </form>
+                                <form action="/tasks/<%= task.id %>/delete"
+                                    method="POST" class="form-delete">
+                                    <button type="submit" class="btn-delete"
+                                        title="Hapus tugas">&times;</button>
+                                </form>
+                            </div>
+                        </li>
+                        <% }) %>
+                    </ul>
+                </section>
+            </div>
+
+            <footer class="app-footer">Dibuat Oleh Wahyu H. menggunakan Node.js,
+                Express &amp; MySQL</footer>
+
+        </main>
+
+        <script id="tasks-data"
+            type="application/json"><%- JSON.stringify(tasks).replace(/</g, "\\u003c") %></script>
+        <script src="/js/app.js" defer></script>
+    </body>
+</html>
